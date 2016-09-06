@@ -29,7 +29,6 @@ def get_p10_results(events, ages, sexes, years):
 
     # construct a list containing every combination of parameters
     param_combos = list(itertools.product(events, ages, sexes, years))
-    #rank_request_urls = [build_p10_url(event,age,sex,year) for event,age,sex,year in param_combos]
 
     header_list = []
     ranking_list = []
@@ -43,7 +42,7 @@ def get_p10_results(events, ages, sexes, years):
     
     result_dfs = []
 
-    for event, age_group, sex, year in param_combos: #rank_request_urls:
+    for event, age_group, sex, year in param_combos:
         #params = (event, age, sex, year)
         print (event, age_group, sex, year)
         query = "?event=%s&agegroup=%s&sex=%s&year=%s" % (event, age_group, sex, year)
@@ -51,14 +50,12 @@ def get_p10_results(events, ages, sexes, years):
         rank_page = requests.get(rank_request_url)
         tree = html.fromstring(rank_page.content)
         
-        print rank_request_url
         
         # Get the header on first request
         if not header_list:
             header_list = tree.xpath(header_xpath)
             header_list = [h.text_content().lower() for h in header_list]
             
-            print header_list
             
             # Add in some missing headers
             header_list[2] = 'indoor'
