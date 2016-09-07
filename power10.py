@@ -10,8 +10,8 @@ from lxml import etree
    
 def get_p10_results(events, ages, sexes, years):
     """
-    Return a dictionary combining results returned for a given combination of
-    url parameters.
+    Return a dataframe of all results returned for a given combination of
+    url parameters (events, ages, sexes, years)
     """
 
     # xpath patterns
@@ -42,9 +42,8 @@ def get_p10_results(events, ages, sexes, years):
     
     result_dfs = []
 
+    # Iterate over the list of parameters
     for event, age_group, sex, year in param_combos:
-        #params = (event, age, sex, year)
-        print (event, age_group, sex, year)
         query = "?event=%s&agegroup=%s&sex=%s&year=%s" % (event, age_group, sex, year)
         rank_request_url = protocol + domain + path + query
         rank_page = requests.get(rank_request_url)
