@@ -6,9 +6,22 @@ import itertools
 from lxml import html
 from lxml import etree
 
+def get_athletes():
+    pass
+#//*[@id="cphBody_divBestPerformances"]/table/tbody/tr[1]/td[1]/b
+#//*[@id="cphBody_divBestPerformances"]/table/tbody/tr[2]/td[1]/b
+#//*[@id="cphBody_divBestPerformances"]/table/tbody/tr[3]/td[4]
 
+def get_coaches():
+    pass
+
+def get_clubs():
+    pass
+
+def get_results():    
+    pass
    
-def get_p10_results(events, ages, sexes, years):
+def get_rankings(events, ages, sexes, years):
     """
     Return a dataframe of all results returned for a given combination of
     url parameters (events, ages, sexes, years)
