@@ -5,9 +5,21 @@ import numpy as np
 import itertools
 from lxml import html
 from lxml import etree
+from bs4 import BeautifulSoup
 
 def get_athletes():
-    pass
+    # url for this request
+    url="http://powerof10.info/athletes/profile.aspx?athleteid=6004"
+
+    # Scrape the HTML at the url
+    r = requests.get(url)
+
+    # Turn the HTML into a Beautiful Soup object
+    soup = BeautifulSoup(r.text, 'lxml')
+    
+    div = soup.find("div", id ='cphBody_divBestPerformances')
+    print ''.join(map(str, div.contents))
+#    pass
 #//*[@id="cphBody_divBestPerformances"]/table/tbody/tr[1]/td[1]/b
 #//*[@id="cphBody_divBestPerformances"]/table/tbody/tr[2]/td[1]/b
 #//*[@id="cphBody_divBestPerformances"]/table/tbody/tr[3]/td[4]
@@ -116,3 +128,6 @@ def get_rankings(events, ages, sexes, years):
         result_dfs.append(df)
 
     return pd.concat(result_dfs, ignore_index=True)
+
+if __name__ == '__main__':
+    get_athletes()
